@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Programează un apel — Velichi Luca</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --blue: #2563eb; --white: #f8fafc; --gray: #94a3b8; }
+html { scroll-behavior: smooth; }
+body { background: #000; color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 17px; line-height: 1.6; overflow-x: hidden; min-height: 100vh; }
+
+#stars-wrap { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.s1 { position: absolute; width: 1px; height: 1px; background: transparent; box-shadow: 22px 145px #fff,68px 380px #fff,105px 62px #fff,45px 520px #fff,88px 270px #fff,130px 710px #fff,15px 830px #fff,175px 440px #fff,220px 85px #fff,310px 340px #fff,395px 180px #fff,420px 55px #fff,510px 130px #fff,570px 460px #fff,630px 290px #fff,740px 200px #fff,810px 480px #fff,940px 110px #fff,1010px 370px #fff,1100px 700px #fff,1200px 560px #fff,1320px 130px #fff,1380px 450px #fff,1460px 100px #fff,1520px 250px #fff; animation: twinkle1 1.8s ease-in-out infinite alternate; }
+.s2 { position: absolute; width: 2px; height: 2px; border-radius: 50%; background: transparent; box-shadow: 80px 230px rgba(180,210,255,.9),190px 510px rgba(180,210,255,.9),320px 140px rgba(180,210,255,.9),450px 620px rgba(180,210,255,.9),690px 740px rgba(180,210,255,.9),930px 530px rgba(180,210,255,.9),1160px 280px rgba(200,220,255,.9),1390px 380px rgba(200,220,255,.9),1500px 750px rgba(200,220,255,.9); animation: twinkle2 2.1s ease-in-out infinite alternate; }
+.s3 { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: transparent; box-shadow: 110px 190px rgba(150,200,255,1),340px 430px rgba(255,230,180,1),570px 110px rgba(200,180,255,1),950px 220px rgba(255,230,180,1),1320px 160px rgba(150,200,255,1),1470px 280px rgba(255,230,180,1); animation: twinkle3 1.5s ease-in-out infinite alternate; }
+@keyframes twinkle1 { 0%{opacity:.15} 50%{opacity:.7} 100%{opacity:.25} }
+@keyframes twinkle2 { 0%{opacity:.2}  50%{opacity:.9} 100%{opacity:.35} }
+@keyframes twinkle3 { 0%{opacity:.3}  50%{opacity:1}  100%{opacity:.4} }
+
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; padding: 20px 48px; background: rgba(0,0,0,.75); backdrop-filter: blur(18px); border-bottom: 1px solid rgba(255,255,255,.05); }
+.logo { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: 0em; color: var(--white); text-decoration: none; }
+
+#wrap { position: relative; z-index: 2; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 120px 24px 80px; }
+
+.form-card { width: 100%; max-width: 640px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.1); border-radius: 24px; padding: 48px; animation: fadeUp .7s ease both; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+.form-header { margin-bottom: 36px; }
+.form-label-top { font-size: .78rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #60a5fa; margin-bottom: 12px; }
+.form-header h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.8rem; font-weight: 800; line-height: 1.2; letter-spacing: 0em; margin-bottom: 12px; }
+.form-header p { color: var(--gray); font-size: .95rem; font-weight: 300; line-height: 1.6; }
+
+.progress-wrap { margin-bottom: 36px; }
+.progress-info { display: flex; justify-content: space-between; margin-bottom: 8px; }
+.progress-info span { font-size: .8rem; color: var(--gray); }
+.progress-bar { height: 3px; background: rgba(255,255,255,.1); border-radius: 99px; overflow: hidden; }
+.progress-fill { height: 100%; background: var(--blue); border-radius: 99px; transition: width .4s ease; }
+
+.step { display: none; animation: fadeUp .4s ease both; }
+.step.active { display: block; }
+
+.question-num { font-size: .78rem; color: #60a5fa; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 10px; }
+.question-text { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 700; line-height: 1.35; margin-bottom: 28px; }
+
+.options { display: flex; flex-direction: column; gap: 10px; }
+.opt { display: flex; align-items: center; gap: 14px; padding: 14px 18px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); border-radius: 12px; cursor: pointer; transition: border-color .2s, background .2s; font-size: .95rem; }
+.opt:hover { border-color: rgba(37,99,235,.5); background: rgba(37,99,235,.08); }
+.opt.selected { border-color: #2563eb; background: rgba(37,99,235,.15); }
+.opt-dot { width: 18px; height: 18px; border-radius: 50%; border: 2px solid rgba(255,255,255,.25); flex-shrink: 0; transition: border-color .2s, background .2s; display: flex; align-items: center; justify-content: center; }
+.opt.selected .opt-dot { border-color: #2563eb; background: #2563eb; }
+.opt.selected .opt-dot::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #fff; }
+
+.txt-input { width: 100%; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); border-radius: 12px; padding: 16px 18px; color: var(--white); font-size: .95rem; font-family: 'DM Sans', sans-serif; outline: none; transition: border-color .2s; resize: none; }
+.txt-input:focus { border-color: #2563eb; }
+.txt-input::placeholder { color: var(--gray); }
+
+.input-group { display: flex; flex-direction: column; gap: 12px; }
+
+.btn-row { display: flex; gap: 12px; margin-top: 32px; }
+.btn-next { flex: 1; background: var(--blue); color: #fff; padding: 15px 28px; border-radius: 10px; font-size: .95rem; font-weight: 500; border: none; cursor: pointer; transition: background .2s, transform .15s; font-family: 'DM Sans', sans-serif; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.btn-next:hover { background: #1d4ed8; transform: translateY(-1px); }
+.btn-next:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+.btn-back { background: rgba(255,255,255,.06); color: var(--white); border: 1px solid rgba(255,255,255,.12); padding: 15px 22px; border-radius: 10px; font-size: .95rem; font-weight: 500; border: none; cursor: pointer; transition: background .2s; font-family: 'DM Sans', sans-serif; }
+.btn-back:hover { background: rgba(255,255,255,.1); }
+
+.success-screen { display: none; text-align: center; padding: 20px 0; animation: fadeUp .5s ease both; }
+.success-icon { font-size: 3.5rem; margin-bottom: 20px; }
+.success-screen h2 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.6rem; font-weight: 800; margin-bottom: 12px; }
+.success-screen p { color: var(--gray); font-size: .95rem; font-weight: 300; margin-bottom: 32px; line-height: 1.7; }
+.btn-calendly { display: inline-flex; align-items: center; gap: 8px; background: var(--blue); color: #fff; padding: 15px 32px; border-radius: 10px; font-size: .95rem; font-weight: 500; text-decoration: none; transition: background .2s, transform .15s; }
+.btn-calendly:hover { background: #1d4ed8; transform: translateY(-2px); }
+
+@media(max-width:600px) {
+  nav { padding: 16px 20px; }
+  .form-card { padding: 28px 20px; }
+  .form-header h1 { font-size: 1.4rem; }
+}
+</style>
+</head>
+<body>
+
+<div id="stars-wrap">
+  <div class="s1"></div>
+  <div class="s2"></div>
+  <div class="s3"></div>
+</div>
+
+<nav><a href="index.html" class="logo">Velichi Luca</a></nav>
+
+<div id="wrap">
+  <div class="form-card">
+
+    <div class="form-header">
+      <div class="form-label-top" id="step-top">Pasul 1 din 8</div>
+      <h1>Hai să vedem cum te pot ajuta</h1>
+      <p>Durează 2 minute. Răspunsurile tale mă ajută să vin pregătit la apel cu soluții concrete pentru afacerea ta.</p>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-info">
+        <span id="step-label">Pasul 1 din 8</span>
+        <span id="step-pct">12%</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:12%"></div></div>
+    </div>
+
+    <form id="qform">
+
+      <!-- STEP 1 — Date contact -->
+      <div class="step active" id="s1">
+        <div class="question-num">Pasul 1</div>
+        <div class="question-text">Cum te cheamă și cum te putem contacta?</div>
+        <div class="input-group">
+          <input type="text"  class="txt-input" id="inp-nume"  placeholder="Numele tău complet" autocomplete="name">
+          <input type="tel"   class="txt-input" id="inp-tel"   placeholder="Număr de telefon (ex: 07xx xxx xxx)" autocomplete="tel">
+          <input type="email" class="txt-input" id="inp-email" placeholder="Adresă de email" autocomplete="email">
+        </div>
+      </div>
+
+      <!-- STEP 2 — Tip afacere -->
+      <div class="step" id="s2">
+        <div class="question-num">Întrebarea 1 din 7</div>
+        <div class="question-text">Ce tip de afacere conduci?</div>
+        <div class="options">
+          <div class="opt" data-q="2" data-val="Restaurant / Bar / Cafenea"><div class="opt-dot"></div>Restaurant / Bar / Cafenea</div>
+          <div class="opt" data-q="2" data-val="Salon Beauty / Coafor / Spa"><div class="opt-dot"></div>Salon Beauty / Coafor / Spa</div>
+          <div class="opt" data-q="2" data-val="Sală de Sport / Fitness"><div class="opt-dot"></div>Sală de Sport / Fitness</div>
+          <div class="opt" data-q="2" data-val="Salon de Evenimente"><div class="opt-dot"></div>Salon de Evenimente</div>
+          <div class="opt" data-q="2" data-val="Clinică / Cabinet Medical"><div class="opt-dot"></div>Clinică / Cabinet Medical</div>
+          <div class="opt" data-q="2" data-val="Retail / Magazin"><div class="opt-dot"></div>Retail / Magazin</div>
+          <div class="opt" data-q="2" data-val="Altceva"><div class="opt-dot"></div>Altceva</div>
+        </div>
+      </div>
+
+      <!-- STEP 3 — Ore repetitive -->
+      <div class="step" id="s3">
+        <div class="question-num">Întrebarea 2 din 7</div>
+        <div class="question-text">Câte ore pe săptămână petreci tu sau angajații tăi pe sarcini repetitive?</div>
+        <div class="options">
+          <div class="opt" data-q="3" data-val="Sub 5 ore"><div class="opt-dot"></div>Sub 5 ore</div>
+          <div class="opt" data-q="3" data-val="5 - 10 ore"><div class="opt-dot"></div>5 - 10 ore</div>
+          <div class="opt" data-q="3" data-val="10 - 20 ore"><div class="opt-dot"></div>10 - 20 ore</div>
+          <div class="opt" data-q="3" data-val="Peste 20 ore"><div class="opt-dot"></div>Peste 20 ore</div>
+        </div>
+      </div>
+
+      <!-- STEP 4 — Clienti pierduti -->
+      <div class="step" id="s4">
+        <div class="question-num">Întrebarea 3 din 7</div>
+        <div class="question-text">Câți clienți potențiali crezi că ai pierdut luna trecută fără să știi?</div>
+        <div class="options">
+          <div class="opt" data-q="4" data-val="Probabil niciunul"><div class="opt-dot"></div>Probabil niciunul</div>
+          <div class="opt" data-q="4" data-val="1 - 5 clienți"><div class="opt-dot"></div>1 - 5 clienți</div>
+          <div class="opt" data-q="4" data-val="5 - 15 clienți"><div class="opt-dot"></div>5 - 15 clienți</div>
+          <div class="opt" data-q="4" data-val="Peste 15 clienți"><div class="opt-dot"></div>Peste 15 clienți</div>
+          <div class="opt" data-q="4" data-val="Nu știu, dar probabil mulți"><div class="opt-dot"></div>Nu știu, dar probabil mulți</div>
+        </div>
+      </div>
+
+      <!-- STEP 5 — 2 ore recuperate -->
+      <div class="step" id="s5">
+        <div class="question-num">Întrebarea 4 din 7</div>
+        <div class="question-text">Dacă ai recupera 2 ore pe zi, ce ai face cu ele?</div>
+        <textarea class="txt-input" id="inp-ore" rows="4" placeholder="Scrie răspunsul tău aici..."></textarea>
+      </div>
+
+      <!-- STEP 6 — Obstacol scalare -->
+      <div class="step" id="s6">
+        <div class="question-num">Întrebarea 5 din 7</div>
+        <div class="question-text">Ce crezi că te împiedică cel mai mult să scalezi afacerea acum?</div>
+        <textarea class="txt-input" id="inp-obstacol" rows="4" placeholder="Scrie răspunsul tău aici..."></textarea>
+      </div>
+
+      <!-- STEP 7 — Experienta AI -->
+      <div class="step" id="s7">
+        <div class="question-num">Întrebarea 6 din 7</div>
+        <div class="question-text">Ai mai folosit vreodată tool-uri AI sau automatizări în afacerea ta?</div>
+        <div class="options">
+          <div class="opt" data-q="7" data-val="Nu, niciodată"><div class="opt-dot"></div>Nu, niciodată</div>
+          <div class="opt" data-q="7" data-val="Am încercat câteva, dar nu le-am implementat serios"><div class="opt-dot"></div>Am încercat câteva, dar nu le-am implementat serios</div>
+          <div class="opt" data-q="7" data-val="Da, folosesc deja câteva tool-uri"><div class="opt-dot"></div>Da, folosesc deja câteva tool-uri</div>
+          <div class="opt" data-q="7" data-val="Da, sunt familiarizat cu AI și vreau mai mult"><div class="opt-dot"></div>Da, sunt familiarizat cu AI și vreau mai mult</div>
+        </div>
+      </div>
+
+      <!-- STEP 8 — Buget -->
+      <div class="step" id="s8">
+        <div class="question-num">Întrebarea 7 din 7</div>
+        <div class="question-text">Cât ești dispus să investești lunar pentru a rezolva asta?</div>
+        <div class="options">
+          <div class="opt" data-q="8" data-val="Sub 100€"><div class="opt-dot"></div>Sub 100€</div>
+          <div class="opt" data-q="8" data-val="100 - 300€"><div class="opt-dot"></div>100 - 300€</div>
+          <div class="opt" data-q="8" data-val="300 - 600€"><div class="opt-dot"></div>300 - 600€</div>
+          <div class="opt" data-q="8" data-val="Peste 600€"><div class="opt-dot"></div>Peste 600€</div>
+          <div class="opt" data-q="8" data-val="Nu știu încă"><div class="opt-dot"></div>Nu știu încă</div>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button type="button" class="btn-back" id="btn-back" style="display:none" onclick="prevStep()">← Înapoi</button>
+        <button type="button" class="btn-next" id="btn-next" onclick="nextStep()" disabled>
+          Continuă <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </form>
+
+    <!-- SUCCESS -->
+    <div class="success-screen" id="success">
+      <div class="success-icon">🎯</div>
+      <h2>Răspunsurile tale au fost trimise!</h2>
+      <p>Acum alege data și ora care îți convine pentru apelul nostru de 30 de minute. Vin pregătit cu idei concrete pentru afacerea ta.</p>
+      <a href="https://calendly.com/luca-velichi/30min" target="_blank" class="btn-calendly">
+        Alege data &amp; ora apelului →
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+var current = 1;
+var total   = 8;
+var answers = {};
+
+// Validare step 1 — contact
+function validateContact() {
+  var nume  = document.getElementById('inp-nume').value.trim();
+  var tel   = document.getElementById('inp-tel').value.trim();
+  var email = document.getElementById('inp-email').value.trim();
+  return nume.length > 1 && tel.length > 5 && email.indexOf('@') > 0;
+}
+
+// Validare textarea
+function validateTextarea() {
+  if (current === 5) return document.getElementById('inp-ore').value.trim().length > 2;
+  if (current === 6) return document.getElementById('inp-obstacol').value.trim().length > 2;
+  return true;
+}
+
+// Input listeners step 1
+['inp-nume','inp-tel','inp-email'].forEach(function(id) {
+  document.getElementById(id).addEventListener('input', function() {
+    if (current === 1) document.getElementById('btn-next').disabled = !validateContact();
+  });
+});
+
+// Textarea listeners
+['inp-ore','inp-obstacol'].forEach(function(id) {
+  document.getElementById(id).addEventListener('input', function() {
+    if (current === 5 || current === 6) {
+      document.getElementById('btn-next').disabled = !validateTextarea();
+    }
+  });
+});
+
+// Options click
+document.querySelectorAll('.opt').forEach(function(opt) {
+  opt.addEventListener('click', function() {
+    var q = opt.dataset.q;
+    document.querySelectorAll('.opt[data-q="' + q + '"]').forEach(function(o) { o.classList.remove('selected'); });
+    opt.classList.add('selected');
+    answers['q' + q] = opt.dataset.val;
+    document.getElementById('btn-next').disabled = false;
+  });
+});
+
+function updateUI() {
+  var pct = Math.round((current / total) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('step-label').textContent = 'Pasul ' + current + ' din ' + total;
+  document.getElementById('step-pct').textContent = pct + '%';
+  document.getElementById('step-top').textContent = 'Pasul ' + current + ' din ' + total;
+  document.getElementById('btn-back').style.display = current > 1 ? 'block' : 'none';
+
+  if (current === total) {
+    document.getElementById('btn-next').innerHTML = 'Trimite răspunsurile <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  } else {
+    document.getElementById('btn-next').innerHTML = 'Continuă <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  }
+}
+
+function checkNextEnabled() {
+  if (current === 1) return validateContact();
+  if (current === 5 || current === 6) return validateTextarea();
+  return !!answers['q' + current];
+}
+
+function nextStep() {
+  if (current < total) {
+    document.getElementById('s' + current).classList.remove('active');
+    current++;
+    document.getElementById('s' + current).classList.add('active');
+    updateUI();
+    document.getElementById('btn-next').disabled = !checkNextEnabled();
+  } else {
+    submitForm();
+  }
+}
+
+function prevStep() {
+  document.getElementById('s' + current).classList.remove('active');
+  current--;
+  document.getElementById('s' + current).classList.add('active');
+  updateUI();
+  document.getElementById('btn-next').disabled = !checkNextEnabled();
+}
+
+function submitForm() {
+  var btn = document.getElementById('btn-next');
+  btn.disabled = true;
+  btn.textContent = 'Se trimite...';
+
+  var formData = new FormData();
+  formData.append('Nume',                    document.getElementById('inp-nume').value);
+  formData.append('Telefon',                 document.getElementById('inp-tel').value);
+  formData.append('Email',                   document.getElementById('inp-email').value);
+  formData.append('Tip afacere',             answers['q2'] || '');
+  formData.append('Ore sarcini repetitive',  answers['q3'] || '');
+  formData.append('Clienti pierduti',        answers['q4'] || '');
+  formData.append('2 ore recuperate',        document.getElementById('inp-ore').value);
+  formData.append('Obstacol scalare',        document.getElementById('inp-obstacol').value);
+  formData.append('Experienta AI',           answers['q7'] || '');
+  formData.append('Buget lunar',             answers['q8'] || '');
+
+  fetch('https://formspree.io/f/xdayjzoo', {
+    method: 'POST', body: formData,
+    headers: { 'Accept': 'application/json' }
+  }).then(function() { showSuccess(); }).catch(function() { showSuccess(); });
+}
+
+function showSuccess() {
+  document.getElementById('qform').style.display = 'none';
+  document.querySelector('.form-header').style.display = 'none';
+  document.querySelector('.progress-wrap').style.display = 'none';
+  document.getElementById('success').style.display = 'block';
+}
+</script>
+</body>
+</html>
