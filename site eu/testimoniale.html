@@ -3,96 +3,54 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Testimoniale — Velichi Luca Automatizări AI</title>
-<meta name="description" content="Ce spun clienții despre Velichi Luca. Testimoniale reale de la afaceri din Galați și România care au implementat automatizări AI.">
+<title>Testimoniale — Velichi Luca</title>
 <link rel="icon" type="image/png" href="eu1.png">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root { --blue: #2563eb; --white: #f8fafc; --gray: #94a3b8; }
-html { scroll-behavior: smooth; }
-body { background: #000; color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 17px; line-height: 1.6; overflow-x: hidden; min-height: 100vh; }
-
-#stars-wrap { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
-.s1 { position: absolute; width: 1px; height: 1px; background: transparent; box-shadow: 22px 145px #fff,68px 380px #fff,105px 62px #fff,45px 520px #fff,88px 270px #fff,130px 710px #fff,15px 830px #fff,175px 440px #fff,220px 85px #fff,310px 340px #fff,395px 180px #fff,510px 130px #fff,570px 460px #fff,630px 290px #fff,740px 200px #fff,810px 480px #fff,940px 110px #fff,1010px 370px #fff,1100px 700px #fff,1200px 560px #fff,1320px 130px #fff,1380px 450px #fff,1460px 100px #fff,1520px 250px #fff; animation: twinkle1 1.8s ease-in-out infinite alternate; }
-.s2 { position: absolute; width: 2px; height: 2px; border-radius: 50%; background: transparent; box-shadow: 80px 230px rgba(180,210,255,.9),320px 140px rgba(180,210,255,.9),570px 310px rgba(180,210,255,.9),810px 180px rgba(180,210,255,.9),1070px 600px rgba(180,210,255,.9),1310px 350px rgba(180,210,255,.9),1490px 580px rgba(180,210,255,.9),150px 680px rgba(200,220,255,.9),400px 810px rgba(200,220,255,.9),760px 650px rgba(200,220,255,.9); animation: twinkle2 2.1s ease-in-out infinite alternate; }
-.s3 { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: transparent; box-shadow: 110px 190px rgba(150,200,255,1),340px 430px rgba(255,230,180,1),570px 110px rgba(200,180,255,1),950px 220px rgba(255,230,180,1),1320px 160px rgba(150,200,255,1),1470px 280px rgba(255,230,180,1); animation: twinkle3 1.5s ease-in-out infinite alternate; }
-@keyframes twinkle1 { 0%{opacity:.15} 50%{opacity:.7} 100%{opacity:.25} }
-@keyframes twinkle2 { 0%{opacity:.2} 50%{opacity:.9} 100%{opacity:.35} }
-@keyframes twinkle3 { 0%{opacity:.3} 50%{opacity:1} 100%{opacity:.4} }
-
-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; background: rgba(0,0,0,.75); backdrop-filter: blur(18px); border-bottom: 1px solid rgba(255,255,255,.05); }
-.logo { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--white); text-decoration: none; }
-.nav-back { display: flex; align-items: center; gap: 8px; color: var(--gray); font-size: .9rem; text-decoration: none; transition: color .2s; }
-.nav-back:hover { color: var(--white); }
-
-#wrap { position: relative; z-index: 2; padding: 140px 48px 100px; max-width: 1200px; margin: 0 auto; }
-
-.page-header { text-align: center; margin-bottom: 80px; animation: up .8s ease both; }
-.lbl { font-size: .78rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #60a5fa; margin-bottom: 14px; }
-h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(2rem,4vw,3.2rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 20px; }
-h1 em { color: #60a5fa; font-style: normal; }
-.page-sub { color: var(--gray); font-size: 1.05rem; font-weight: 300; line-height: 1.75; max-width: 560px; margin: 0 auto; }
-
-/* STATS */
-.stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 80px; }
-.stat { text-align: center; padding: 32px; border: 1px solid rgba(255,255,255,.07); border-radius: 16px; background: rgba(255,255,255,.02); animation: up .8s ease both; }
-.stat .big { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 3rem; font-weight: 800; color: #60a5fa; line-height: 1; margin-bottom: 8px; }
-.stat p { color: var(--gray); font-size: .9rem; font-weight: 300; }
-
-/* VIDEO GRID */
-.section-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 32px; letter-spacing: -0.02em; }
-.videos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px,1fr)); gap: 24px; margin-bottom: 80px; }
-.video-card { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); border-radius: 20px; overflow: hidden; animation: up .6s ease both; transition: border-color .3s, transform .3s; }
-.video-card:hover { border-color: rgba(37,99,235,.4); transform: translateY(-4px); }
-.video-placeholder { width: 100%; aspect-ratio: 9/16; background: rgba(255,255,255,.05); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; color: var(--gray); font-size: .88rem; position: relative; overflow: hidden; }
-.video-placeholder .play-icon { width: 56px; height: 56px; border-radius: 50%; background: var(--blue); display: flex; align-items: center; justify-content: center; }
-.video-placeholder .play-icon svg { margin-left: 4px; }
-.video-embed { width: 100%; aspect-ratio: 9/16; }
-.video-embed iframe { width: 100%; height: 100%; border: none; }
-.video-info { padding: 20px 24px; }
-.video-info .client-name { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
-.video-info .client-biz { color: #60a5fa; font-size: .85rem; font-weight: 500; margin-bottom: 10px; }
-.video-info .client-quote { color: var(--gray); font-size: .88rem; font-weight: 300; line-height: 1.6; font-style: italic; }
-
-/* TEXT TESTIMONIALE */
-.text-testimonials { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 20px; margin-bottom: 80px; }
-.tcard { padding: 32px; border: 1px solid rgba(255,255,255,.08); border-radius: 16px; background: rgba(255,255,255,.03); animation: up .6s ease both; }
-.tcard .stars { color: #fbbf24; font-size: 1rem; margin-bottom: 16px; letter-spacing: 2px; }
-.tcard .quote { color: var(--white); font-size: .95rem; font-weight: 300; line-height: 1.75; margin-bottom: 20px; font-style: italic; }
-.tcard .author { display: flex; align-items: center; gap: 12px; }
-.tcard .author-dot { width: 36px; height: 36px; border-radius: 50%; background: var(--blue); display: flex; align-items: center; justify-content: center; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: .9rem; flex-shrink: 0; }
-.tcard .author-name { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: .9rem; }
-.tcard .author-biz { color: var(--gray); font-size: .82rem; font-weight: 300; }
-
-/* CTA */
-.cta-box { text-align: center; padding: 64px 40px; border: 1px solid rgba(37,99,235,.3); border-radius: 24px; background: rgba(37,99,235,.06); animation: up .6s ease both; }
-.cta-box h2 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(1.6rem,3vw,2.2rem); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 16px; }
-.cta-box p { color: var(--gray); font-size: 1rem; font-weight: 300; margin-bottom: 32px; }
-.btn-p { display: inline-flex; align-items: center; gap: 8px; background: var(--blue); color: #fff; padding: 15px 32px; border-radius: 10px; font-size: .95rem; font-weight: 500; text-decoration: none; transition: background .2s, transform .15s; }
-.btn-p:hover { background: #1d4ed8; transform: translateY(-2px); }
-
-@keyframes up { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-
-@media(max-width:768px) {
-  nav { padding: 14px 20px; }
-  #wrap { padding: 110px 20px 80px; }
-  .stats { grid-template-columns: 1fr 1fr; }
-  .videos-grid { grid-template-columns: 1fr; }
-}
-@media(max-width:480px) {
-  .stats { grid-template-columns: 1fr; }
-}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--blue:#2563eb;--white:#f8fafc;--gray:#94a3b8}
+html{scroll-behavior:smooth}
+body{background:#000;color:var(--white);font-family:'DM Sans',sans-serif;font-size:17px;line-height:1.6;overflow-x:hidden;min-height:100vh}
+#sw{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.s1{position:absolute;width:1px;height:1px;background:transparent;box-shadow:22px 145px #fff,68px 380px #fff,220px 85px #fff,510px 130px #fff,810px 480px #fff,1010px 370px #fff;animation:tw 1.8s ease-in-out infinite alternate}
+@keyframes tw{0%{opacity:.15}100%{opacity:.8}}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:rgba(0,0,0,.75);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.05)}
+.logo{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.1rem;color:var(--white);text-decoration:none}
+.nav-back{display:flex;align-items:center;gap:8px;color:var(--gray);font-size:.9rem;text-decoration:none}
+.nav-back:hover{color:var(--white)}
+#wrap{position:relative;z-index:2;padding:140px 48px 100px;max-width:1200px;margin:0 auto}
+.page-header{text-align:center;margin-bottom:80px}
+.lbl{font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#60a5fa;margin-bottom:14px}
+h1{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:800;line-height:1.1;letter-spacing:-0.03em;margin-bottom:20px}
+h1 em{color:#60a5fa;font-style:normal}
+.page-sub{color:var(--gray);font-size:1.05rem;font-weight:300;line-height:1.75;max-width:560px;margin:0 auto}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:80px}
+.stat{text-align:center;padding:32px;border:1px solid rgba(255,255,255,.07);border-radius:16px;background:rgba(255,255,255,.02)}
+.stat .big{font-family:'Plus Jakarta Sans',sans-serif;font-size:3rem;font-weight:800;color:#60a5fa;line-height:1;margin-bottom:8px}
+.stat p{color:var(--gray);font-size:.9rem;font-weight:300}
+.section-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:1.4rem;font-weight:700;margin-bottom:32px;letter-spacing:-0.02em}
+.videos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-bottom:80px}
+.video-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:20px;overflow:hidden;transition:border-color .3s,transform .3s}
+.video-card:hover{border-color:rgba(37,99,235,.4);transform:translateY(-4px)}
+.video-thumb{position:relative;cursor:pointer;aspect-ratio:9/16;overflow:hidden;background:#000}
+.video-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.play-btn{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3)}
+.play-btn div{width:64px;height:64px;background:rgba(37,99,235,.9);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.video-info{padding:20px 24px}
+.video-info .client-name{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:1rem;margin-bottom:4px}
+.video-info .client-biz{color:#60a5fa;font-size:.85rem;font-weight:500;margin-bottom:10px}
+.cta-box{text-align:center;padding:64px 40px;border:1px solid rgba(37,99,235,.3);border-radius:24px;background:rgba(37,99,235,.06)}
+.cta-box h2{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:16px}
+.cta-box p{color:var(--gray);font-size:1rem;font-weight:300;margin-bottom:32px}
+.btn-p{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;padding:15px 32px;border-radius:10px;font-size:.95rem;font-weight:500;text-decoration:none}
+.btn-p:hover{background:#1d4ed8}
+.loading{color:var(--gray);font-size:.9rem;text-align:center;padding:40px}
+@media(max-width:768px){nav{padding:14px 20px}#wrap{padding:110px 20px 80px}.stats{grid-template-columns:1fr 1fr}.videos-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.stats{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-
-<div id="stars-wrap">
-  <div class="s1"></div>
-  <div class="s2"></div>
-  <div class="s3"></div>
-</div>
-
+<div id="sw"><div class="s1"></div></div>
 <nav>
   <a href="index.html" class="logo">Velichi Luca</a>
   <a href="index.html" class="nav-back">
@@ -100,187 +58,61 @@ h1 em { color: #60a5fa; font-style: normal; }
     Înapoi acasă
   </a>
 </nav>
-
 <div id="wrap">
-
   <div class="page-header">
     <div class="lbl">Rezultate reale</div>
     <h1>Ce spun clienții<br>despre <em>colaborarea cu mine</em></h1>
-    <p class="page-sub">Nu mă crezi pe cuvânt — ascultă-i pe ei. Afaceri reale din Galați și România care au implementat automatizări AI și au văzut diferența.</p>
+    <p class="page-sub">Nu mă crezi pe cuvânt — ascultă-i pe ei. Afaceri reale din Galați și România care au văzut diferența.</p>
   </div>
-
   <div class="stats">
     <div class="stat"><div class="big">7+</div><p>Clienți mulțumiți</p></div>
     <div class="stat"><div class="big">24/7</div><p>Sisteme care lucrează non-stop</p></div>
     <div class="stat"><div class="big">100%</div><p>Soluții personalizate</p></div>
   </div>
-
-  <!-- VIDEO TESTIMONIALE -->
   <div class="section-title">Video testimoniale</div>
-  <div class="videos-grid">
-
-    <!-- TACOS & BURGERS -->
-    <div class="video-card" id="tacos">
-      <div class="video-embed">
-        <div onclick="window.open('https://youtube.com/shorts/EgxVpTFyLj8','_blank')" style="position:relative;cursor:pointer;aspect-ratio:9/16;overflow:hidden;background:#000">
-          <img src="https://img.youtube.com/vi/EgxVpTFyLj8/maxresdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block">
-          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3)">
-            <div style="width:64px;height:64px;background:rgba(37,99,235,.9);border-radius:50%;display:flex;align-items:center;justify-content:center">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="video-info">
-        <div class="client-name">Tacos & Burgers Galați</div>
-        <div class="client-biz">Restaurant • Galați</div>
-        <a href="https://tacos-and-burgers.com/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;color:#60a5fa;font-size:.82rem;font-weight:600;text-decoration:none;margin-top:8px">↗ Vezi proiectul</a>
-      </div>
-    </div>
-
-    <!-- WOK AND NOODLES -->
-    <div class="video-card" id="wok">
-      <div class="video-embed">
-        <div onclick="window.open('https://youtube.com/shorts/zcr2VQ0FfmI','_blank')" style="position:relative;cursor:pointer;aspect-ratio:9/16;overflow:hidden;background:#000">
-          <img src="https://img.youtube.com/vi/zcr2VQ0FfmI/maxresdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block">
-          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3)">
-            <div style="width:64px;height:64px;background:rgba(37,99,235,.9);border-radius:50%;display:flex;align-items:center;justify-content:center">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="video-info">
-        <div class="client-name">Wok and Noodles</div>
-        <div class="client-biz">Restaurant Asiatic • Galați</div>
-        <a href="https://www.wok-and-noodles.ro/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;color:#60a5fa;font-size:.82rem;font-weight:600;text-decoration:none;margin-top:8px">↗ Vezi proiectul</a>
-      </div>
-    </div>
-
-    <!-- CABINET AVOCAT -->
-    <div class="video-card" id="avocat">
-      <div class="video-embed">
-        <div onclick="window.open('https://youtu.be/4K5A3jqqvAo','_blank')" style="position:relative;cursor:pointer;aspect-ratio:9/16;overflow:hidden;background:#000">
-          <img src="https://img.youtube.com/vi/4K5A3jqqvAo/maxresdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block">
-          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3)">
-            <div style="width:64px;height:64px;background:rgba(37,99,235,.9);border-radius:50%;display:flex;align-items:center;justify-content:center">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="video-info">
-        <div class="client-name">Cabinet Avocat Dinu Georgiana</div>
-        <div class="client-biz">Cabinet Avocat • Galați</div>
-        <a href="https://www.avocat-dinu-georgiana.ro/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;color:#60a5fa;font-size:.82rem;font-weight:600;text-decoration:none;margin-top:8px">↗ Vezi proiectul</a>
-      </div>
-    </div>
-
-    <!-- EDGAR NICOV -->
-    <div class="video-card" id="edgar">
-      <div class="video-embed">
-        <div onclick="window.open('https://youtu.be/Dd3mfWlhiHI','_blank')" style="position:relative;cursor:pointer;aspect-ratio:9/16;overflow:hidden;background:#000">
-          <img src="https://img.youtube.com/vi/Dd3mfWlhiHI/maxresdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block">
-          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3)">
-            <div style="width:64px;height:64px;background:rgba(37,99,235,.9);border-radius:50%;display:flex;align-items:center;justify-content:center">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="video-info">
-        <div class="client-name">Edgar Nicov</div>
-        <div class="client-biz">Consultant • Portofoliu Personal</div>
-        <a href="https://edgar-test.vercel.app/index.html" target="_blank" style="display:inline-flex;align-items:center;gap:6px;color:#60a5fa;font-size:.82rem;font-weight:600;text-decoration:none;margin-top:8px">↗ Vezi proiectul</a>
-      </div>
-    </div>
-
-    <!-- CLINICA CERAL -->
-    <div class="video-card" id="ceral">
-      <div class="video-embed">
-        <div onclick="window.open('https://youtube.com/shorts/NCtQFO3MIo4','_blank')" style="position:relative;cursor:pointer;aspect-ratio:9/16;overflow:hidden;background:#000">
-          <img src="https://img.youtube.com/vi/NCtQFO3MIo4/maxresdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block">
-          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3)">
-            <div style="width:64px;height:64px;background:rgba(37,99,235,.9);border-radius:50%;display:flex;align-items:center;justify-content:center">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="video-info">
-        <div class="client-name">Clinica Ceral</div>
-        <div class="client-biz">Clinică Dentară • Chatbot AI</div>
-        <a href="https://www.clinicaceral.com/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;color:#60a5fa;font-size:.82rem;font-weight:600;text-decoration:none;margin-top:8px">↗ Vezi proiectul</a>
-      </div>
-    </div>
-
-    <!-- CIPRIAN -->
-    <div class="video-card" id="ciprian">
-      <div class="video-embed">
-        <div onclick="window.open('https://youtu.be/cjKM2_oZjFU','_blank')" style="position:relative;cursor:pointer;aspect-ratio:9/16;overflow:hidden;background:#000">
-          <img src="https://img.youtube.com/vi/cjKM2_oZjFU/maxresdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block">
-          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3)">
-            <div style="width:64px;height:64px;background:rgba(37,99,235,.9);border-radius:50%;display:flex;align-items:center;justify-content:center">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="video-info">
-        <div class="client-name">Ciprian</div>
-        <div class="client-biz">Consultant Marketing Digital</div>
-      </div>
-    </div>
-
-    <!-- MRS SPELLBOOKS -->
-    <div class="video-card" id="carte">
-      <div class="video-embed">
-        <div onclick="window.open('https://youtu.be/Ce0y0Ha9lx0','_blank')" style="position:relative;cursor:pointer;aspect-ratio:9/16;overflow:hidden;background:#000">
-          <img src="https://img.youtube.com/vi/Ce0y0Ha9lx0/maxresdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block">
-          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3)">
-            <div style="width:64px;height:64px;background:rgba(37,99,235,.9);border-radius:50%;display:flex;align-items:center;justify-content:center">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="video-info">
-        <div class="client-name">Mrs Spellbooks — Sonia Mihalcea</div>
-        <div class="client-biz">Autor • Carte Dark Fantasy</div>
-        <a href="https://mrsspellbooks.vercel.app/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;color:#60a5fa;font-size:.82rem;font-weight:600;text-decoration:none;margin-top:8px">↗ Vezi proiectul</a>
-      </div>
-    </div>
-
+  <div class="videos-grid" id="videos-grid">
+    <div class="loading">Se încarcă testimonialele...</div>
   </div>
-
-  <!-- CTA -->
   <div class="cta-box">
     <h2>Vrei să fii și tu<br>printre clienții mulțumiți?</h2>
     <p>Programează un apel gratuit de 30 minute și hai să vedem cum pot ajuta afacerea ta.</p>
-    <a href="form.html" class="btn-p">
-      Programează apelul gratuit
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
+    <a href="form.html" class="btn-p">Programează apelul gratuit →</a>
   </div>
-
 </div>
-
-</body>
 <script>
-// Scroll la anchor cu offset pentru nav
-window.addEventListener('DOMContentLoaded', function() {
+var SUPA_URL = 'https://qlyvsktpsxmiranvxpnl.supabase.co';
+var SUPA_KEY = 'sb_publishable_gd9QwJ2fEEUMrsi5NDTSVg_XDC0pW38';
+
+async function load() {
+  var res = await fetch(SUPA_URL + '/rest/v1/testimoniale?order=ordine.asc', {
+    headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY }
+  });
+  var data = await res.json();
+  var grid = document.getElementById('videos-grid');
+  if (!data || !data.length) { grid.innerHTML = '<div class="loading">Niciun testimonial adăugat încă.</div>'; return; }
+  grid.innerHTML = data.map(function(t) {
+    var ytUrl = 'https://youtu.be/' + t.youtube_id;
+    var thumb = 'https://img.youtube.com/vi/' + t.youtube_id + '/maxresdefault.jpg';
+    var linkBtn = t.link_proiect ? '<a href="' + t.link_proiect + '" target="_blank" style="display:inline-flex;align-items:center;gap:6px;color:#60a5fa;font-size:.82rem;font-weight:600;text-decoration:none;margin-top:8px">↗ Vezi proiectul</a>' : '';
+    return '<div class="video-card" id="' + t.youtube_id + '">' +
+      '<div class="video-thumb" onclick="window.open(\'' + ytUrl + '\',\'_blank\')">' +
+      '<img src="' + thumb + '" alt="' + t.nume_client + '">' +
+      '<div class="play-btn"><div><svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div></div>' +
+      '</div>' +
+      '<div class="video-info"><div class="client-name">' + t.nume_client + '</div><div class="client-biz">' + (t.tip_afacere || '') + '</div>' + linkBtn + '</div>' +
+      '</div>';
+  }).join('');
+
+  // scroll to anchor
   var hash = window.location.hash;
   if (hash) {
     setTimeout(function() {
       var el = document.querySelector(hash);
-      if (el) {
-        var y = el.getBoundingClientRect().top + window.pageYOffset - 100;
-        window.scrollTo({ top: y, behavior: 'smooth' });
-        el.style.border = '1px solid rgba(37,99,235,.6)';
-        el.style.boxShadow = '0 0 0 4px rgba(37,99,235,.1)';
-      }
-    }, 300);
+      if (el) { var y = el.getBoundingClientRect().top + window.pageYOffset - 100; window.scrollTo({top:y,behavior:'smooth'}); }
+    }, 400);
   }
-});
+}
+load();
 </script>
+</body>
 </html>

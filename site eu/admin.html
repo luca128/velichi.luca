@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Velichi Luca</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#0a0a0f;color:#f8fafc;font-family:'Segoe UI',sans-serif;font-size:15px;min-height:100vh}
+#login{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+.login-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:40px;width:100%;max-width:380px;text-align:center}
+.login-box h1{font-size:1.4rem;font-weight:700;margin-bottom:8px}
+.login-box p{color:#94a3b8;font-size:.9rem;margin-bottom:28px}
+#panel{display:none;padding:32px;max-width:1100px;margin:0 auto}
+header{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.08)}
+header h1{font-size:1.3rem;font-weight:700}
+.tabs{display:flex;gap:8px;margin-bottom:28px}
+.tab{padding:9px 20px;border-radius:8px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:#94a3b8;cursor:pointer;font-size:.88rem;font-weight:500}
+.tab.active{background:#2563eb;border-color:#2563eb;color:#fff}
+.section{display:none}
+.section.active{display:block}
+.form-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:28px;margin-bottom:24px}
+.form-card h2{font-size:1rem;font-weight:700;margin-bottom:20px;color:#60a5fa}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-group{display:flex;flex-direction:column;gap:6px}
+.form-group.full{grid-column:1/-1}
+label{font-size:.82rem;font-weight:600;color:#94a3b8}
+input,textarea,select{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:10px 14px;color:#f8fafc;font-size:.9rem;width:100%;outline:none;font-family:inherit}
+input:focus,textarea:focus,select:focus{border-color:#2563eb}
+textarea{resize:vertical;min-height:80px}
+.btn{padding:10px 22px;border-radius:8px;border:none;font-size:.88rem;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-primary{background:#2563eb;color:#fff}
+.btn-primary:hover{background:#1d4ed8}
+.btn-danger{background:rgba(239,68,68,.15);color:#f87171;border:1px solid rgba(239,68,68,.3)}
+.btn-danger:hover{background:rgba(239,68,68,.25)}
+.btn-sm{padding:6px 14px;font-size:.78rem}
+.msg{padding:12px 16px;border-radius:8px;margin-bottom:16px;font-size:.88rem;display:none}
+.msg.success{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);color:#6ee7b7}
+.msg.error{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#fca5a5}
+.items-list{display:flex;flex-direction:column;gap:10px;margin-top:20px}
+.item{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.item-info{flex:1;min-width:0}
+.item-name{font-weight:600;font-size:.92rem;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item-sub{color:#94a3b8;font-size:.8rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item-actions{display:flex;gap:8px;flex-shrink:0}
+.divider{border-top:1px solid rgba(255,255,255,.06);margin:24px 0}
+h3{font-size:.95rem;font-weight:700;margin-bottom:14px;color:#f8fafc}
+</style>
+</head>
+<body>
+
+<div id="login">
+  <div class="login-box">
+    <h1>🔐 Admin Panel</h1>
+    <p>Velichi Luca Agency</p>
+    <div class="msg" id="login-msg"></div>
+    <div class="form-group" style="margin-bottom:16px;text-align:left">
+      <label>Parolă</label>
+      <input type="password" id="pwd" placeholder="Introdu parola..." onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <button class="btn btn-primary" style="width:100%" onclick="doLogin()">Intră în panel</button>
+  </div>
+</div>
+
+<div id="panel">
+  <header>
+    <h1>⚡ Admin Panel — Velichi Luca</h1>
+    <button class="btn btn-danger btn-sm" onclick="logout()">Deconectare</button>
+  </header>
+
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('proiecte')">Proiecte</div>
+    <div class="tab" onclick="switchTab('testimoniale')">Testimoniale</div>
+  </div>
+
+  <!-- PROIECTE -->
+  <div class="section active" id="tab-proiecte">
+    <div class="form-card">
+      <h2>+ Adaugă proiect nou</h2>
+      <div class="msg" id="msg-proiect"></div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Nume proiect *</label>
+          <input type="text" id="p-nume" placeholder="ex: Tacos & Burgers Galați">
+        </div>
+        <div class="form-group">
+          <label>Tip / Locație</label>
+          <input type="text" id="p-tip" placeholder="ex: Restaurant • Galați">
+        </div>
+        <div class="form-group full">
+          <label>Descriere *</label>
+          <textarea id="p-desc" placeholder="Site de prezentare realizat pentru..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Link site *</label>
+          <input type="text" id="p-link" placeholder="https://...">
+        </div>
+        <div class="form-group">
+          <label>Link testimonial (ex: testimoniale.html#tacos)</label>
+          <input type="text" id="p-test" placeholder="testimoniale.html#tacos">
+        </div>
+        <div class="form-group">
+          <label>Imagine *</label>
+          <input type="file" id="p-img-file" accept="image/*" onchange="previewImg(this)">
+          <input type="text" id="p-img" placeholder="URL imagine (se completează automat după upload)" style="margin-top:8px">
+          <div id="p-img-preview" style="margin-top:8px;display:none">
+            <img id="p-img-prev-img" style="width:100%;height:160px;object-fit:cover;border-radius:8px;border:1px solid rgba(255,255,255,.1)">
+          </div>
+          <button class="btn btn-primary btn-sm" style="margin-top:8px;width:fit-content" onclick="uploadImg()" type="button" id="upload-btn">⬆ Încarcă imaginea</button>
+          <span id="upload-status" style="font-size:.8rem;color:#6ee7b7;margin-left:8px;display:none">✓ Încărcat!</span>
+        </div>
+        <div class="form-group">
+          <label>Badge</label>
+          <select id="p-badge">
+            <option value="Site Web">Site Web</option>
+            <option value="Chatbot AI">Chatbot AI</option>
+            <option value="Automatizare">Automatizare</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Ordine (număr)</label>
+          <input type="number" id="p-ordine" placeholder="1" value="1">
+        </div>
+      </div>
+      <div style="margin-top:20px">
+        <button class="btn btn-primary" onclick="addProiect()">Publică proiect</button>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <h3>Proiecte existente</h3>
+    <div class="items-list" id="lista-proiecte"></div>
+  </div>
+
+  <!-- TESTIMONIALE -->
+  <div class="section" id="tab-testimoniale">
+    <div class="form-card">
+      <h2>+ Adaugă testimonial nou</h2>
+      <div class="msg" id="msg-test"></div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Nume client *</label>
+          <input type="text" id="t-nume" placeholder="ex: Tacos & Burgers Galați">
+        </div>
+        <div class="form-group">
+          <label>Tip afacere</label>
+          <input type="text" id="t-tip" placeholder="ex: Restaurant • Galați">
+        </div>
+        <div class="form-group">
+          <label>YouTube Video ID *</label>
+          <input type="text" id="t-ytid" placeholder="ex: EgxVpTFyLj8">
+        </div>
+        <div class="form-group">
+          <label>Link proiect</label>
+          <input type="text" id="t-link" placeholder="https://...">
+        </div>
+        <div class="form-group">
+          <label>Ordine</label>
+          <input type="number" id="t-ordine" placeholder="1" value="1">
+        </div>
+      </div>
+      <div style="margin-top:20px">
+        <button class="btn btn-primary" onclick="addTestimonial()">Publică testimonial</button>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <h3>Testimoniale existente</h3>
+    <div class="items-list" id="lista-testimoniale"></div>
+  </div>
+</div>
+
+<script>
+const PAROLA = 'velichi2024admin';
+const SUPA_URL = 'https://qlyvsktpsxmiranvxpnl.supabase.co';
+const SUPA_KEY = 'sb_publishable_gd9QwJ2fEEUMrsi5NDTSVg_XDC0pW38';
+
+function previewImg(input) {
+  var file = input.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    document.getElementById('p-img-prev-img').src = e.target.result;
+    document.getElementById('p-img-preview').style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+}
+
+async function uploadImg() {
+  var file = document.getElementById('p-img-file').files[0];
+  if (!file) { alert('Selectează o imagine mai întâi.'); return; }
+  var btn = document.getElementById('upload-btn');
+  btn.textContent = 'Se încarcă...';
+  btn.disabled = true;
+  var fileName = Date.now() + '_' + file.name.replace(/\s/g, '_');
+  var res = await fetch(SUPA_URL + '/storage/v1/object/poze/' + fileName, {
+    method: 'POST',
+    headers: {
+      'apikey': SUPA_KEY,
+      'Authorization': 'Bearer ' + SUPA_KEY,
+      'Content-Type': file.type,
+      'x-upsert': 'true'
+    },
+    body: file
+  });
+  if (res.ok) {
+    var url = SUPA_URL + '/storage/v1/object/public/poze/' + fileName;
+    document.getElementById('p-img').value = url;
+    document.getElementById('upload-status').style.display = 'inline';
+    btn.textContent = '✓ Încărcat';
+  } else {
+    alert('Eroare la upload. Încearcă din nou.');
+    btn.textContent = '⬆ Încarcă imaginea';
+    btn.disabled = false;
+  }
+}
+
+function doLogin() {
+  var pwd = document.getElementById('pwd').value;
+  if (pwd === PAROLA) {
+    sessionStorage.setItem('admin_ok', '1');
+    document.getElementById('login').style.display = 'none';
+    document.getElementById('panel').style.display = 'block';
+    loadAll();
+  } else {
+    var msg = document.getElementById('login-msg');
+    msg.textContent = 'Parolă greșită.';
+    msg.className = 'msg error';
+    msg.style.display = 'block';
+  }
+}
+
+function logout() {
+  sessionStorage.removeItem('admin_ok');
+  location.reload();
+}
+
+window.onload = function() {
+  if (sessionStorage.getItem('admin_ok') === '1') {
+    document.getElementById('login').style.display = 'none';
+    document.getElementById('panel').style.display = 'block';
+    loadAll();
+  }
+};
+
+function switchTab(tab) {
+  document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+  document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
+  event.target.classList.add('active');
+  document.getElementById('tab-' + tab).classList.add('active');
+}
+
+async function api(method, table, body, id) {
+  var url = SUPA_URL + '/rest/v1/' + table + (id ? '?id=eq.' + id : '');
+  var res = await fetch(url, {
+    method: method,
+    headers: {
+      'apikey': SUPA_KEY,
+      'Authorization': 'Bearer ' + SUPA_KEY,
+      'Content-Type': 'application/json',
+      'Prefer': method === 'POST' ? 'return=representation' : ''
+    },
+    body: body ? JSON.stringify(body) : undefined
+  });
+  if (method === 'DELETE') return true;
+  return res.json();
+}
+
+function showMsg(id, text, type) {
+  var el = document.getElementById(id);
+  el.textContent = text;
+  el.className = 'msg ' + type;
+  el.style.display = 'block';
+  setTimeout(function() { el.style.display = 'none'; }, 4000);
+}
+
+async function addProiect() {
+  var nume = document.getElementById('p-nume').value.trim();
+  var desc = document.getElementById('p-desc').value.trim();
+  var link = document.getElementById('p-link').value.trim();
+  var img = document.getElementById('p-img').value.trim();
+  if (!nume || !desc || !link || !img) return showMsg('msg-proiect', 'Completează câmpurile obligatorii.', 'error');
+  await api('POST', 'proiecte', {
+    nume: nume,
+    tip: document.getElementById('p-tip').value.trim(),
+    descriere: desc,
+    link_site: link,
+    link_testimonial: document.getElementById('p-test').value.trim(),
+    imagine_url: img,
+    badge: document.getElementById('p-badge').value,
+    ordine: parseInt(document.getElementById('p-ordine').value) || 1
+  });
+  showMsg('msg-proiect', 'Proiect publicat cu succes!', 'success');
+  ['p-nume','p-tip','p-desc','p-link','p-test','p-img'].forEach(function(id) { document.getElementById(id).value = ''; });
+  loadProiecte();
+}
+
+async function addTestimonial() {
+  var nume = document.getElementById('t-nume').value.trim();
+  var ytid = document.getElementById('t-ytid').value.trim();
+  if (!nume || !ytid) return showMsg('msg-test', 'Completează câmpurile obligatorii.', 'error');
+  await api('POST', 'testimoniale', {
+    nume_client: nume,
+    tip_afacere: document.getElementById('t-tip').value.trim(),
+    youtube_id: ytid,
+    link_proiect: document.getElementById('t-link').value.trim(),
+    ordine: parseInt(document.getElementById('t-ordine').value) || 1
+  });
+  showMsg('msg-test', 'Testimonial publicat cu succes!', 'success');
+  ['t-nume','t-tip','t-ytid','t-link'].forEach(function(id) { document.getElementById(id).value = ''; });
+  loadTestimoniale();
+}
+
+async function deleteItem(table, id, reload) {
+  if (!confirm('Ștergi acest element?')) return;
+  await api('DELETE', table + '?id=eq.' + id, null);
+  reload();
+}
+
+async function loadProiecte() {
+  var data = await api('GET', 'proiecte?order=ordine.asc');
+  var list = document.getElementById('lista-proiecte');
+  if (!data || !data.length) { list.innerHTML = '<p style="color:#94a3b8;font-size:.88rem">Niciun proiect adăugat încă.</p>'; return; }
+  list.innerHTML = data.map(function(p) {
+    return '<div class="item"><div class="item-info"><div class="item-name">' + p.nume + '</div><div class="item-sub">' + (p.tip || '') + ' • ' + (p.badge || '') + '</div></div><div class="item-actions"><button class="btn btn-danger btn-sm" onclick="deleteItem(\'proiecte\','+p.id+',loadProiecte)">Șterge</button></div></div>';
+  }).join('');
+}
+
+async function loadTestimoniale() {
+  var data = await api('GET', 'testimoniale?order=ordine.asc');
+  var list = document.getElementById('lista-testimoniale');
+  if (!data || !data.length) { list.innerHTML = '<p style="color:#94a3b8;font-size:.88rem">Niciun testimonial adăugat încă.</p>'; return; }
+  list.innerHTML = data.map(function(t) {
+    return '<div class="item"><div class="item-info"><div class="item-name">' + t.nume_client + '</div><div class="item-sub">' + (t.tip_afacere || '') + ' • YT: ' + t.youtube_id + '</div></div><div class="item-actions"><button class="btn btn-danger btn-sm" onclick="deleteItem(\'testimoniale\','+t.id+',loadTestimoniale)">Șterge</button></div></div>';
+  }).join('');
+}
+
+function loadAll() { loadProiecte(); loadTestimoniale(); }
+</script>
+</body>
+</html>

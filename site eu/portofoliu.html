@@ -9,18 +9,37 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{background:#000;color:#f8fafc;font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
+#sw{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.s1{position:absolute;width:1px;height:1px;background:transparent;box-shadow:22px 145px #fff,68px 380px #fff,220px 85px #fff,510px 130px #fff,810px 480px #fff,1010px 370px #fff;animation:tw 1.8s ease-in-out infinite alternate}
+@keyframes tw{0%{opacity:.15}100%{opacity:.8}}
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:rgba(0,0,0,.85);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.06)}
 .logo{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.1rem;color:#f8fafc;text-decoration:none}
 .back{color:#94a3b8;font-size:.9rem;text-decoration:none}
+.back:hover{color:#f8fafc}
 #wrap{position:relative;z-index:2;padding:120px 48px 100px;max-width:1200px;margin:0 auto}
 .ph{text-align:center;margin-bottom:64px}
 .lbl{font-size:.75rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#60a5fa;margin-bottom:12px}
 h1{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(1.9rem,4vw,3rem);font-weight:800;line-height:1.1;letter-spacing:-.03em;margin-bottom:16px}
 h1 em{color:#60a5fa;font-style:normal}
 .psub{color:#94a3b8;font-size:.95rem;font-weight:300;line-height:1.75;max-width:500px;margin:0 auto}
+#grid{display:flex;gap:24px;flex-wrap:wrap}
+.card{display:block;width:340px;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:rgba(15,15,25,.9);text-decoration:none;color:#f8fafc;position:relative;transition:border-color .3s,transform .3s}
+.card:hover{border-color:rgba(37,99,235,.5);transform:translateY(-4px)}
+.card img{width:100%;height:220px;object-fit:cover;object-position:center top;display:block}
+.card-badge{position:absolute;top:12px;left:12px;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-radius:100px}
+.bb{background:rgba(37,99,235,.9);color:#fff}
+.bg{background:rgba(16,185,129,.9);color:#fff}
+.card-body{padding:20px;padding-bottom:52px}
+.card-tip{font-size:.68rem;font-weight:700;color:#60a5fa;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.card-nume{font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;font-weight:700;margin-bottom:8px}
+.card-desc{color:#94a3b8;font-size:.85rem;line-height:1.6}
+.card-test{position:absolute;bottom:14px;right:14px;background:rgba(37,99,235,.15);border:1px solid rgba(37,99,235,.4);color:#60a5fa;font-size:.75rem;font-weight:600;padding:5px 11px;border-radius:7px;text-decoration:none}
+.loading{color:#94a3b8;font-size:.9rem;text-align:center;padding:40px}
+@media(max-width:768px){nav{padding:14px 20px}#wrap{padding:100px 16px 80px}#grid{justify-content:center}}
 </style>
 </head>
 <body>
+<div id="sw"><div class="s1"></div></div>
 <nav>
   <a href="index.html" class="logo">Velichi Luca</a>
   <a href="index.html" class="back">← Înapoi acasă</a>
@@ -31,103 +50,29 @@ h1 em{color:#60a5fa;font-style:normal}
     <h1>Proiecte realizate<br>pentru <em>clienți reali</em></h1>
     <p class="psub">Site-uri, chatboți și automatizări AI pentru afaceri din Galați și România.</p>
   </div>
-
-  <div style="display:flex;gap:24px;flex-wrap:wrap">
-
-    <a href="https://tacos-and-burgers.com/" target="_blank" style="display:block;width:340px;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:rgba(15,15,25,.9);text-decoration:none;color:#f8fafc">
-      <div style="position:relative">
-        <img src="tacos.png" style="width:100%;height:220px;object-fit:cover;object-position:center top;display:block">
-        <span style="position:absolute;top:12px;left:12px;background:rgba(37,99,235,.9);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-radius:100px">Site Web</span>
-      </div>
-      <div style="padding:20px">
-        <div style="font-size:.68rem;font-weight:700;color:#60a5fa;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">Restaurant • Galați</div>
-        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;font-weight:700;margin-bottom:8px">Tacos &amp; Burgers Galați</div>
-        <div style="color:#94a3b8;font-size:.85rem;line-height:1.6">Site de prezentare realizat pentru Tacos & Burgers cu un design modern și pagini multiple.</div>
-      </div>
-    </a>
-
-    <a href="https://www.wifitom-service.ro/" target="_blank" style="display:block;width:340px;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:rgba(15,15,25,.9);text-decoration:none;color:#f8fafc">
-      <div style="position:relative">
-        <img src="florin.png" style="width:100%;height:220px;object-fit:cover;object-position:center top;display:block">
-        <span style="position:absolute;top:12px;left:12px;background:rgba(37,99,235,.9);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-radius:100px">Site Web</span>
-      </div>
-      <div style="padding:20px">
-        <div style="font-size:.68rem;font-weight:700;color:#60a5fa;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">Service Electrocasnice • Galați</div>
-        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;font-weight:700;margin-bottom:8px">Wifitom Service</div>
-        <div style="color:#94a3b8;font-size:.85rem;line-height:1.6">Site de prezentare realizat pentru Wifitom Service cu un design modern și secțiune de recenzii.</div>
-      </div>
-    </a>
-
-    <a href="https://mrsspellbooks.vercel.app/" target="_blank" style="display:block;width:340px;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:rgba(15,15,25,.9);text-decoration:none;color:#f8fafc">
-      <div style="position:relative">
-        <img src="carte.png" style="width:100%;height:220px;object-fit:cover;object-position:center top;display:block">
-        <span style="position:absolute;top:12px;left:12px;background:rgba(37,99,235,.9);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-radius:100px">Site Web</span>
-      </div>
-      <div style="padding:20px">
-        <div style="font-size:.68rem;font-weight:700;color:#60a5fa;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">Autor • Carte Dark Fantasy</div>
-        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;font-weight:700;margin-bottom:8px">Mrs Spellbooks — Sonia Mihalcea</div>
-        <div style="color:#94a3b8;font-size:.85rem;line-height:1.6">Site de prezentare realizat pentru cartea "Erou în Devenire" cu un design cinematic și animații elegante.</div>
-      </div>
-    </a>
-
-  </div>
-
-  <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:24px">
-
-    <a href="https://edgar-test.vercel.app/index.html" target="_blank" style="display:block;width:340px;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:rgba(15,15,25,.9);text-decoration:none;color:#f8fafc">
-      <div style="position:relative">
-        <img src="edgar.png" style="width:100%;height:220px;object-fit:cover;object-position:center top;display:block">
-        <span style="position:absolute;top:12px;left:12px;background:rgba(37,99,235,.9);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-radius:100px">Site Web</span>
-      </div>
-      <div style="padding:20px">
-        <div style="font-size:.68rem;font-weight:700;color:#60a5fa;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">Consultant • Portofoliu Personal</div>
-        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;font-weight:700;margin-bottom:8px">Edgar Nicov — Consultant</div>
-        <div style="color:#94a3b8;font-size:.85rem;line-height:1.6">Site de prezentare realizat pentru consultantul Edgar Nicov cu un design elegant și animații moderne.</div>
-      </div>
-    </a>
-
-    <a href="https://www.avocat-dinu-georgiana.ro/" target="_blank" style="display:block;width:340px;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:rgba(15,15,25,.9);text-decoration:none;color:#f8fafc">
-      <div style="position:relative">
-        <img src="avocat.png.jpg" style="width:100%;height:220px;object-fit:cover;object-position:center top;display:block">
-        <span style="position:absolute;top:12px;left:12px;background:rgba(37,99,235,.9);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-radius:100px">Site Web</span>
-      </div>
-      <div style="padding:20px">
-        <div style="font-size:.68rem;font-weight:700;color:#60a5fa;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">Cabinet Avocat • Galați</div>
-        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;font-weight:700;margin-bottom:8px">Cabinet Avocat Dinu Georgiana</div>
-        <div style="color:#94a3b8;font-size:.85rem;line-height:1.6">Site de prezentare realizat pentru un cabinet de avocatură din Galați cu un design elegant și blog juridic.</div>
-      </div>
-    </a>
-
-    <a href="https://www.wok-and-noodles.ro/" target="_blank" style="display:block;width:340px;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:rgba(15,15,25,.9);text-decoration:none;color:#f8fafc">
-      <div style="position:relative">
-        <img src="wok.png" style="width:100%;height:220px;object-fit:cover;object-position:center top;display:block">
-        <span style="position:absolute;top:12px;left:12px;background:rgba(37,99,235,.9);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-radius:100px">Site Web</span>
-      </div>
-      <div style="padding:20px">
-        <div style="font-size:.68rem;font-weight:700;color:#60a5fa;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">Restaurant Asiatic • Galați</div>
-        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;font-weight:700;margin-bottom:8px">Wok and Noodles</div>
-        <div style="color:#94a3b8;font-size:.85rem;line-height:1.6">Site de prezentare realizat pentru un restaurant asiatic din Galați cu blog, pagină de evenimente și design modern.</div>
-      </div>
-    </a>
-
-  </div>
-
-  <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:24px">
-
-    <a href="https://www.clinicaceral.com/" target="_blank" style="display:block;width:340px;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:rgba(15,15,25,.9);text-decoration:none;color:#f8fafc">
-      <div style="position:relative">
-        <img src="ceral.png" style="width:100%;height:220px;object-fit:cover;object-position:center top;display:block">
-        <span style="position:absolute;top:12px;left:12px;background:rgba(16,185,129,.9);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-radius:100px">Chatbot AI</span>
-      </div>
-      <div style="padding:20px">
-        <div style="font-size:.68rem;font-weight:700;color:#60a5fa;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">Clinică Dentară • Chatbot AI</div>
-        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;font-weight:700;margin-bottom:8px">CeralBot — Clinica Ceral</div>
-        <div style="color:#94a3b8;font-size:.85rem;line-height:1.6">Chatbot AI implementat pentru Clinica Ceral care răspunde automat întrebărilor pacienților, 24/7.</div>
-      </div>
-    </a>
-
-  </div>
-
+  <div id="grid"><div class="loading">Se încarcă proiectele...</div></div>
 </div>
+<script>
+var SUPA_URL = 'https://qlyvsktpsxmiranvxpnl.supabase.co';
+var SUPA_KEY = 'sb_publishable_gd9QwJ2fEEUMrsi5NDTSVg_XDC0pW38';
+
+async function load() {
+  var res = await fetch(SUPA_URL + '/rest/v1/proiecte?order=ordine.asc', {
+    headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY }
+  });
+  var data = await res.json();
+  var grid = document.getElementById('grid');
+  if (!data || !data.length) { grid.innerHTML = '<div class="loading">Niciun proiect adăugat încă.</div>'; return; }
+  grid.innerHTML = data.map(function(p) {
+    var badgeClass = p.badge === 'Chatbot AI' ? 'bg' : 'bb';
+    var testBtn = p.link_testimonial ? '<a href="' + p.link_testimonial + '" class="card-test" onclick="event.stopPropagation()">▶ Testimonial</a>' : '';
+    return '<a href="' + p.link_site + '" target="_blank" class="card">' +
+      '<div style="position:relative"><img src="' + p.imagine_url + '" alt="' + p.nume + '"><span class="card-badge ' + badgeClass + '">' + p.badge + '</span></div>' +
+      '<div class="card-body"><div class="card-tip">' + (p.tip || '') + '</div><div class="card-nume">' + p.nume + '</div><div class="card-desc">' + p.descriere + '</div></div>' +
+      testBtn + '</a>';
+  }).join('');
+}
+load();
+</script>
 </body>
 </html>
