@@ -190,18 +190,23 @@ async function uploadImg() {
   var file = document.getElementById('p-img-file').files[0];
   if (!file) { alert('Selectează o imagine mai întâi.'); return; }
   var btn = document.getElementById('upload-btn');
-  btn.textContent = 'Se încarcă...';
+  btn.textContent = 'Se comprimă...';
   btn.disabled = true;
+
+  // Compresie automata
+  var compressedFile = await compressImage(file, 800, 0.75);
+
+  btn.textContent = 'Se încarcă...';
   var fileName = Date.now() + '_' + file.name.replace(/\s/g, '_');
   var res = await fetch(SUPA_URL + '/storage/v1/object/poze/' + fileName, {
     method: 'POST',
     headers: {
       'apikey': SUPA_KEY,
       'Authorization': 'Bearer ' + SUPA_KEY,
-      'Content-Type': file.type,
+      'Content-Type': 'image/jpeg',
       'x-upsert': 'true'
     },
-    body: file
+    body: compressedFile
   });
   if (res.ok) {
     var url = SUPA_URL + '/storage/v1/object/public/poze/' + fileName;
@@ -213,6 +218,27 @@ async function uploadImg() {
     btn.textContent = '⬆ Încarcă imaginea';
     btn.disabled = false;
   }
+}
+
+function compressImage(file, maxWidth, quality) {
+  return new Promise(function(resolve) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var img = new Image();
+      img.onload = function() {
+        var canvas = document.createElement('canvas');
+        var ratio = Math.min(maxWidth / img.width, maxWidth / img.height);
+        if (ratio > 1) ratio = 1;
+        canvas.width = img.width * ratio;
+        canvas.height = img.height * ratio;
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        canvas.toBlob(function(blob) { resolve(blob); }, 'image/jpeg', quality);
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
 }
 
 function doLogin() {
