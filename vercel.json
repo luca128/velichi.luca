@@ -1,8 +1,0 @@
-{
-  "rewrites": [
-    { "source": "/admin", "destination": "/admin.html" },
-    { "source": "/portofoliu", "destination": "/portofoliu.html" },
-    { "source": "/testimoniale", "destination": "/testimoniale.html" },
-    { "source": "/form", "destination": "/form.html" }
-  ]
-}
