@@ -541,6 +541,18 @@ footer p { color: var(--gray); font-size: .82rem; }
   <div class="s2"></div><div class="s3"></div>
 </div>
 
+<!-- COOKIE BANNER -->
+<div id="cookie-banner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(10,10,20,.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.1);padding:14px 48px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
+  <p style="color:#cbd5e1;font-size:.85rem;font-weight:300;margin:0;flex:1;min-width:200px">
+    Folosim cookie-uri pentru a îmbunătăți experiența pe site. 
+    <a href="cookies.html" style="color:#60a5fa;text-decoration:none">Află mai multe</a>
+  </p>
+  <div style="display:flex;gap:10px;flex-shrink:0">
+    <button onclick="refuzCookies()" style="padding:8px 18px;border-radius:8px;border:1px solid rgba(255,255,255,.15);background:transparent;color:#94a3b8;font-size:.83rem;font-weight:500;cursor:pointer">Refuz</button>
+    <button onclick="acceptCookies()" style="padding:8px 18px;border-radius:8px;border:none;background:#2563eb;color:#fff;font-size:.83rem;font-weight:600;cursor:pointer">Accept</button>
+  </div>
+</div>
+
 <div id="wrap">
 <nav>
   <a href="#" class="logo">Velichi Luca</a>
@@ -787,11 +799,16 @@ footer p { color: var(--gray); font-size: .82rem; }
 </section>
 
 <footer>
-  <p>© 2026 Velichi Luca. Automatizări AI pentru afaceri locale.</p>
-  <a href="https://instagram.com/velichi.luca" target="_blank" style="display:inline-flex;align-items:center;gap:8px;color:#94a3b8;text-decoration:none;font-size:.82rem;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#94a3b8'">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-    Designed by Luca
-  </a>
+  <p>© 2026 VL Agency SRL. Toate drepturile rezervate.</p>
+  <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center">
+    <a href="confidentialitate.html" style="color:#94a3b8;font-size:.82rem;text-decoration:none" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#94a3b8'">Politică de Confidențialitate</a>
+    <a href="termeni.html" style="color:#94a3b8;font-size:.82rem;text-decoration:none" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#94a3b8'">Termeni și Condiții</a>
+    <a href="cookies.html" style="color:#94a3b8;font-size:.82rem;text-decoration:none" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#94a3b8'">Politică Cookies</a>
+    <a href="https://instagram.com/velichi.luca" target="_blank" style="display:inline-flex;align-items:center;gap:8px;color:#94a3b8;text-decoration:none;font-size:.82rem;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#94a3b8'">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      Designed by Luca
+    </a>
+  </div>
 </footer>
 </div>
 
@@ -831,6 +848,21 @@ footer p { color: var(--gray); font-size: .82rem; }
   resize();init();draw();
   window.addEventListener('resize',function(){resize();init();});
 })();
+
+// Cookie banner
+(function() {
+  if (!localStorage.getItem('cookie_consent')) {
+    document.getElementById('cookie-banner').style.display = 'flex';
+  }
+})();
+function acceptCookies() {
+  localStorage.setItem('cookie_consent', 'accepted');
+  document.getElementById('cookie-banner').style.display = 'none';
+}
+function refuzCookies() {
+  localStorage.setItem('cookie_consent', 'refused');
+  document.getElementById('cookie-banner').style.display = 'none';
+}
 
 function toggleMenu() {
   var h = document.getElementById('hamburger');
