@@ -81,7 +81,11 @@ h1 em{color:#60a5fa;font-style:normal}
 </div>
 <script>
 var SUPA_URL = 'https://qlyvsktpsxmirarvxpnl.supabase.co';
-var SUPA_KEY = 'sb_publishable_gd9QwJ2fEEUMrsi5NDTSVg_XDC0pW38';
+var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFseXZza3Rwc3htaXJhcnZ4cG5sIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4NDM3NjYsImV4cCI6MjA5NjQxOTc2Nn0.LPaTdfRNHsi4zTUO0OHGZPMb1ub7ObpHYH_lL5Xp7Ag';
+
+function playVideo(el, embedUrl) {
+  el.innerHTML = '<iframe width="100%" style="aspect-ratio:9/16;display:block;border:none" src="' + embedUrl + '" allowfullscreen allow="autoplay; encrypted-media"></iframe>';
+}
 
 async function load() {
   var res = await fetch(SUPA_URL + '/rest/v1/testimoniale?order=ordine.asc', {
@@ -91,12 +95,12 @@ async function load() {
   var grid = document.getElementById('videos-grid');
   if (!data || !data.length) { grid.innerHTML = '<div class="loading">Niciun testimonial adăugat încă.</div>'; return; }
   grid.innerHTML = data.map(function(t) {
-    var ytUrl = 'https://youtu.be/' + t.youtube_id;
-    var thumb = 'https://img.youtube.com/vi/' + t.youtube_id + '/maxresdefault.jpg';
+    var thumb = 'https://i.ytimg.com/vi/' + t.youtube_id + '/hqdefault.jpg';
+    var embedUrl = 'https://www.youtube.com/embed/' + t.youtube_id + '?autoplay=1';
     var linkBtn = t.link_proiect ? '<a href="' + t.link_proiect + '" target="_blank" style="display:inline-flex;align-items:center;gap:6px;color:#60a5fa;font-size:.82rem;font-weight:600;text-decoration:none;margin-top:8px">↗ Vezi proiectul</a>' : '';
     return '<div class="video-card" id="' + t.youtube_id + '">' +
-      '<div class="video-thumb" onclick="window.open(\'' + ytUrl + '\',\'_blank\')">' +
-      '<img src="' + thumb + '" alt="' + t.nume_client + '">' +
+      '<div class="video-thumb" onclick="playVideo(this,\'' + embedUrl + '\')">' +
+      '<img src="' + thumb + '" alt="' + t.nume_client + '" style="width:100%;height:100%;object-fit:cover;display:block">' +
       '<div class="play-btn"><div><svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div></div>' +
       '</div>' +
       '<div class="video-info"><div class="client-name">' + t.nume_client + '</div><div class="client-biz">' + (t.tip_afacere || '') + '</div>' + linkBtn + '</div>' +
