@@ -155,17 +155,25 @@ h3{font-size:.95rem;font-weight:700;margin-bottom:14px;color:#f8fafc}
           <input type="text" id="t-link" placeholder="https://...">
         </div>
         <div class="form-group">
+          <label>Thumbnail video *</label>
+          <input type="file" id="t-thumb-file" accept="image/*" onchange="previewThumb(this)">
+          <input type="text" id="t-thumb" placeholder="URL thumbnail (se completează automat după upload)" style="margin-top:8px">
+          <div id="t-thumb-preview" style="margin-top:8px;display:none">
+            <img id="t-thumb-prev-img" style="width:100%;height:120px;object-fit:cover;border-radius:8px;border:1px solid rgba(255,255,255,.1)">
+          </div>
+          <button class="btn btn-primary btn-sm" style="margin-top:8px;width:fit-content" onclick="uploadThumb()" type="button" id="upload-thumb-btn">⬆ Încarcă thumbnail</button>
+          <span id="upload-thumb-status" style="font-size:.8rem;color:#6ee7b7;margin-left:8px;display:none">✓ Încărcat!</span>
+        </div>
+      </div>
+        <div class="form-group">
           <label>Ordine</label>
           <input type="number" id="t-ordine" placeholder="1" value="1">
         </div>
-      </div>
+    </div>
+
       <div style="margin-top:20px">
         <button class="btn btn-primary" onclick="addTestimonial()">Publică testimonial</button>
       </div>
-    </div>
-
-    <div class="divider"></div>
-    <h3>Testimoniale existente</h3>
     <div class="items-list" id="lista-testimoniale"></div>
   </div>
 </div>
@@ -321,6 +329,48 @@ async function addProiect() {
   loadProiecte();
 }
 
+function previewThumb(input) {
+  var file = input.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    document.getElementById('t-thumb-prev-img').src = e.target.result;
+    document.getElementById('t-thumb-preview').style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+}
+
+async function uploadThumb() {
+  var file = document.getElementById('t-thumb-file').files[0];
+  if (!file) { alert('Selectează o imagine mai întâi.'); return; }
+  var btn = document.getElementById('upload-thumb-btn');
+  btn.textContent = 'Se comprimă...';
+  btn.disabled = true;
+  var compressed = await compressImage(file, 800, 0.75);
+  btn.textContent = 'Se încarcă...';
+  var fileName = 'thumb_' + Date.now() + '_' + file.name.replace(/\s/g, '_');
+  var res = await fetch(SUPA_URL + '/storage/v1/object/poze/' + fileName, {
+    method: 'POST',
+    headers: {
+      'apikey': SUPA_KEY,
+      'Authorization': 'Bearer ' + SUPA_KEY,
+      'Content-Type': 'image/jpeg',
+      'x-upsert': 'true'
+    },
+    body: compressed
+  });
+  if (res.ok) {
+    var url = SUPA_URL + '/storage/v1/object/public/poze/' + fileName;
+    document.getElementById('t-thumb').value = url;
+    document.getElementById('upload-thumb-status').style.display = 'inline';
+    btn.textContent = '✓ Încărcat';
+  } else {
+    alert('Eroare la upload. Încearcă din nou.');
+    btn.textContent = '⬆ Încarcă thumbnail';
+    btn.disabled = false;
+  }
+}
+
 async function addTestimonial() {
   var nume = document.getElementById('t-nume').value.trim();
   var ytid = document.getElementById('t-ytid').value.trim();
@@ -330,10 +380,15 @@ async function addTestimonial() {
     tip_afacere: document.getElementById('t-tip').value.trim(),
     youtube_id: ytid,
     link_proiect: document.getElementById('t-link').value.trim(),
+    thumbnail_url: document.getElementById('t-thumb').value.trim(),
     ordine: parseInt(document.getElementById('t-ordine').value) || 1
   });
   showMsg('msg-test', 'Testimonial publicat cu succes!', 'success');
-  ['t-nume','t-tip','t-ytid','t-link'].forEach(function(id) { document.getElementById(id).value = ''; });
+  ['t-nume','t-tip','t-ytid','t-link','t-thumb'].forEach(function(id) { document.getElementById(id).value = ''; });
+  document.getElementById('t-thumb-preview').style.display = 'none';
+  document.getElementById('upload-thumb-btn').textContent = '⬆ Încarcă thumbnail';
+  document.getElementById('upload-thumb-btn').disabled = false;
+  document.getElementById('upload-thumb-status').style.display = 'none';
   loadTestimoniale();
 }
 

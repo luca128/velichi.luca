@@ -118,7 +118,7 @@ async function load() {
   var grid = document.getElementById('videos-grid');
   if (!data || !data.length) { grid.innerHTML = '<div class="loading">Niciun testimonial adăugat încă.</div>'; return; }
   grid.innerHTML = data.map(function(t) {
-    var thumb = 'https://i.ytimg.com/vi/' + t.youtube_id + '/hqdefault.jpg';
+    var thumb = t.thumbnail_url || 'https://i.ytimg.com/vi/' + t.youtube_id + '/hqdefault.jpg';
     var linkBtn = t.link_proiect ? '<a href="' + t.link_proiect + '" target="_blank" style="display:inline-flex;align-items:center;gap:6px;color:#60a5fa;font-size:.82rem;font-weight:600;text-decoration:none;margin-top:8px">↗ Vezi proiectul</a>' : '';
     return '<div class="video-card" id="' + t.youtube_id + '">' +
       '<div class="video-thumb" onclick="playVideo(this,\'' + t.youtube_id + '\')">' +
